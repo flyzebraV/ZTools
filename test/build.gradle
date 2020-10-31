@@ -35,10 +35,14 @@ dependencies {
 }
 publish {
     userOrg = 'flyzebra'        //bintray.com用户名
+    //gradlew clean build bintrayUpload -PbintrayUser=xxx -PbintrayKey=xxx -PdryRun=false
+    // 这里PbintrayUser有可能和userOrg不一样的，PbintrayUser是登录名
+
     repoName = 'Test'				//新建的仓库名
     groupId = 'com.flyzebraxx'             //jcenter上的路径
     artifactId = 'test'             //项目名称
     publishVersion = '1.0.0'        //版本号
     desc = 'java tools'    //项目描述
     website = 'https://github.com/vincentleezebra/ZTools'  //放Github项目地址，记住不要加.git，是项目主页地址，项目一定要上传git
+
 }
