@@ -1,0 +1,236 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:bind="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="animal"
+            type="com.vincent.jetpacktest.bean.Animal" />
+
+        <variable
+            name="user"
+            type="com.vincent.jetpacktest.bean.User" />
+
+        <import type="androidx.databinding.ObservableMap" />
+
+        <variable
+            name="map"
+            type="ObservableMap&lt;String, Object>" />
+
+        <import type="androidx.databinding.ObservableArrayList" />
+
+        <variable
+            name="list"
+            type="ObservableArrayList&lt;Object>" />
+
+
+        <variable
+            name="myHandler"
+            type="com.vincent.jetpacktest.listener.DbClickHandler" />
+
+        <variable
+            name="myPresent"
+            type="com.vincent.jetpacktest.listener.MyPresent" />
+
+        <import type="android.view.View" />
+
+        <import type="com.vincent.jetpacktest.utils.MyStringUtils" />
+
+
+    </data>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scrollbars="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:padding="16sp">
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="布局绑定表达式↓↓↓"
+                android:textSize="16sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{user.firstName}"
+                android:textSize="16sp" />
+
+            <include layout="@layout/line" />
+
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="getBindByLayoutInflater"
+                android:text="使用 LayoutInflater 获取视图"
+                android:textAllCaps="false"
+                android:textSize="16sp" />
+
+
+            <include layout="@layout/line" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="表达式 null合并运算↓↓↓ "
+                android:textColor="@android:color/black"
+                android:textSize="16sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{user.firstName??user.lastName}"
+                android:textColor="@android:color/black"
+                android:textSize="16sp" />
+
+
+            <include layout="@layout/line" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="避免空指针，取类型默认值↓↓↓"
+                android:textSize="16sp" />
+
+            <!--这里假设animal为空 但是界面不会显示null,
+            不会报异常，而是显示空字符串 -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{animal.color}"
+                android:textSize="16sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{animal.color+user.lastName}"
+                android:textSize="16sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{Integer.toString(animal.age)}"
+                android:textSize="16sp" />
+
+            <include layout="@layout/line" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="集合↓↓↓"
+                android:textSize="16sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{String.valueOf(map.age)}" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{(String)map.lastName}" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{list[0]}" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{list[1]}" />
+
+            <include layout="@layout/line" />
+
+            <!--@资源没有代码提示-->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="访问资源"
+                android:textColor="@{user!=null ? @color/colorAccent:@color/colorPrimaryDark}"
+                android:textSize="16sp" />
+
+
+            <include layout="@layout/line" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="@{myHandler::onClickOk}"
+                android:text="方法引用"
+                android:textAllCaps="false"
+                android:textSize="16sp" />
+
+            <include layout="@layout/line" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="@{(view)->myPresent.onSaveClick(view,user,user)}"
+                android:text="事件监听,传递任意参数\n@{()->myPresent.onSaveClick(user)"
+                android:textAllCaps="false"
+                android:textSize="16sp" />
+
+            <include layout="@layout/line" />
+
+            <!--这里不导入View类 则无法使用View.VISIBLE-->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="导入 import"
+                android:textAllCaps="false"
+                android:textSize="16sp"
+                android:visibility="@{user!=null?View.VISIBLE:View.GONE}" />
+
+            <include layout="@layout/line" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="导入-静态类方法↓↓↓"
+                android:textAllCaps="false"
+                android:textSize="16sp" />
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{MyStringUtils.capitalize(user.lastName)}"
+                android:textAllCaps="false"
+                android:textSize="16sp" />
+
+            <include layout="@layout/line" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="include 传递变量↓↓↓"
+                android:textAllCaps="false"
+                android:textSize="16sp" />
+
+
+
+            <include
+                layout="@layout/layout_include_user"
+                bind:myPresent="@{myPresent}"
+                bind:user="@{user}" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="数据绑定不支持 include 作为 merge 元素的直接子元素"
+                android:textAllCaps="false"
+                android:textSize="16sp" />
+
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+</layout>

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+
+    <androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        tools:context=".ScrollingActivity"
+        tools:showIn="@layout/activity_scrolling">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <Button
+                android:id="@+id/data_binding"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="DataBinding表达式" />
+
+            <Button
+                android:id="@+id/data_binding_observa"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="DataBinding可观察" />
+
+            <Button
+                android:id="@+id/data_binding_adapter"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="DataBinding绑定适配器" />
+
+            <Button
+                android:id="@+id/data_binding_both"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="DataBinding双向绑定" />
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+</layout>
